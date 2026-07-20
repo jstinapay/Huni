@@ -42,7 +42,7 @@ export function TextToSpeechForm({
     validators: {
         onSubmit: ttsFormSchema,
     },
-    onSubmit: async (values) => {
+    onSubmit: async () => {
         // TBC
     }
   });

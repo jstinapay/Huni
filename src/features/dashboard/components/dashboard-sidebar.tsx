@@ -15,7 +15,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { OrganizationSwitcher, UserButton, useClerk } from "@clerk/nextjs";
 import {
