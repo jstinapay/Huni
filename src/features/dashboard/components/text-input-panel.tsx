@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Coins } from "lucide-react";
+import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-import { 
+import {
   TEXT_MAX_LENGTH
 } from "@/features/text-to-speech/data/constants";
 
@@ -23,9 +24,14 @@ export function TextInputPanel() {
   };
 
   return (
-    <div className="
-      rounded-[22px] bg-linear-185 from-[#ff8ee3] from-15% via-[#57d7e0] via-39% to-[#dbf1f2] to-85% p-0.5 shadow-[0_0_0_4px_white]
-    ">
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="
+        rounded-[22px] bg-linear-185 from-[#ff8ee3] from-15% via-[#57d7e0] via-39% to-[#dbf1f2] to-85% p-0.5 shadow-[0_0_0_4px_white]
+      "
+    >
       {/* Using px values for border-radius to ensure proper gradient border math (outer - padding = inner). */}
       {/* Standard classes like rounded-4xl use CSS calc() which doesn't align cleanly at corners. */}
       <div className="rounded-[20px] bg-[#F9F9F9] p-1">
@@ -75,6 +81,6 @@ export function TextInputPanel() {
           </Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

@@ -9,8 +9,8 @@ export function HeroPattern() {
                 blur={3}
                 speed="slow"
                 waveOpacity={0.1}
-                waveWidth={60}
-                waveYOffset={250}
+                waveWidth={100}
+                waveYOffset={670}
                 containerClassName="h-full"
                 className="hidden"
             />
