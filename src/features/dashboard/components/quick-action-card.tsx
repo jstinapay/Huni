@@ -17,7 +17,7 @@ export function QuickActionCard({
   return (
     <SpotlightCard
       className="group rounded-xl border bg-card p-3 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20"
-      spotlightColor="rgba(99, 102, 241, 0.15)"
+      spotlightColor="rgba(27, 106, 165, 0.15)"
     >
       <div className="flex gap-4">
         {/* Visual placeholder with gradient */}

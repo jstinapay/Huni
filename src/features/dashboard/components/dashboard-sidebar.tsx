@@ -15,7 +15,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { OrganizationSwitcher, UserButton, useClerk } from "@clerk/nextjs";
 import {
@@ -166,7 +165,6 @@ export function DashboardSidebar() {
               huni 
             </span>
           </Link>
-          <SidebarTrigger className="size-8 rounded-lg text-muted-foreground hover:text-foreground group-data-[collapsible=icon]:hidden" />
         </div>
         <SidebarMenu>
           <SidebarMenuItem>
