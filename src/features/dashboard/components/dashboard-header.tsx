@@ -1,13 +1,16 @@
 "use client"
 
-import { useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import { Headphones, ThumbsUp } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { BlurText } from "@/components/ui/blur-text";
 
 export function DashboardHeader() {
     const { isLoaded, user } = useUser();
+
+    const displayName = isLoaded ? (user?.fullName ?? user?.firstName ?? "User") : "...";
 
     return (
         <div className="flex items-start justify-between">
@@ -15,9 +18,14 @@ export function DashboardHeader() {
                 <p className="text-sm text-muted-foreground">
                     Welcome back
                 </p>
-                <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight">
-                    {isLoaded ? (user?.fullName ?? user?.firstName ?? "User") : "..."}
-                </h1>
+                <BlurText
+                    text={displayName}
+                    animateBy="words"
+                    direction="top"
+                    delay={150}
+                    stepDuration={0.4}
+                    className="text-2xl lg:text-3xl font-semibold tracking-tight"
+                />
             </div>
 
             <div className="lg:flex items-center gap-3 hidden">
@@ -28,7 +36,7 @@ export function DashboardHeader() {
                     </Link>
                 </Button>
                 <Button variant="outline" size="sm">
-                    <Link className="inline-flex items-center gap-2"href="mailto:justin_custodio@dlsu.edu.ph">
+                    <Link className="inline-flex items-center gap-2" href="mailto:justin_custodio@dlsu.edu.ph">
                         <Headphones />
                         <span className="hidden lg:block">Need help?</span>
                     </Link>

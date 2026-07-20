@@ -162,8 +162,8 @@ export function DashboardSidebar() {
               height={28}
               className="size-7 rounded-lg shadow-[0px_1px_2px_rgba(15,23,42,0.08)]"
             />
-            <span className="truncate text-lg font-semibold tracking-tight text-foreground group-data-[collapsible=icon]:hidden">
-              Huni
+            <span className="truncate text-lg font-extrabold tracking-tight text-foreground group-data-[collapsible=icon]:hidden">
+              huni 
             </span>
           </Link>
           <SidebarTrigger className="size-8 rounded-lg text-muted-foreground hover:text-foreground group-data-[collapsible=icon]:hidden" />
@@ -198,7 +198,7 @@ export function DashboardSidebar() {
       <SidebarContent className="py-2">
         <NavSection items={mainMenuItems} pathname={pathname} />
         <NavSection
-          label="Workspace"
+          label="Support"
           items={otherMenuItems}
           pathname={pathname}
         />
