@@ -23,18 +23,18 @@ export function PageHeader({
                 <h1 className="text-lg font-semibold tracking-tight">{title}</h1>
             </div>
             <div className="flex items-center gap-3">
-                <Button variant="outline" size="sm">
-                    <Link href="mailto:justin_custodio@dlsu.edu.ph">
+                <Link href="mailto:justin_custodio@dlsu.edu.ph">
+                    <Button variant="outline" size="sm" className="gap-2">
                         <ThumbsUp />
                         <span className="hidden lg:block">Feedback</span>
-                    </Link>
-                </Button>
-                <Button variant="outline" size="sm">
-                    <Link href="mailto:justin_custodio@dlsu.edu.ph">
+                    </Button>
+                </Link>
+                <Link href="mailto:justin_custodio@dlsu.edu.ph">
+                    <Button variant="outline" size="sm" className="gap-2">
                         <Headphones />
                         <span className="hidden lg:block">Need help?</span>
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
             </div>
 
         </div>

@@ -29,18 +29,18 @@ export function DashboardHeader() {
             </div>
 
             <div className="lg:flex items-center gap-3 hidden">
-                <Button variant="outline" size="sm">
-                    <Link className="inline-flex items-center gap-2" href="mailto:justin_custodio@dlsu.edu.ph">
+                <Link href="mailto:justin_custodio@dlsu.edu.ph">
+                    <Button variant="outline" size="sm" className="gap-2">
                         <ThumbsUp />
                         <span className="hidden lg:block">Feedback</span>
-                    </Link>
-                </Button>
-                <Button variant="outline" size="sm">
-                    <Link className="inline-flex items-center gap-2" href="mailto:justin_custodio@dlsu.edu.ph">
+                    </Button>
+                </Link>
+                <Link href="mailto:justin_custodio@dlsu.edu.ph">
+                    <Button variant="outline" size="sm" className="gap-2">
                         <Headphones />
                         <span className="hidden lg:block">Need help?</span>
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
             </div>
         </div>
     )

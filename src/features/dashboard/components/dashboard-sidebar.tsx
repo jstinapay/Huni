@@ -166,7 +166,6 @@ export function DashboardSidebar() {
               huni 
             </span>
           </Link>
-          <SidebarTrigger className="size-8 rounded-lg text-muted-foreground hover:text-foreground group-data-[collapsible=icon]:hidden" />
         </div>
         <SidebarMenu>
           <SidebarMenuItem>
