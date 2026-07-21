@@ -1,5 +1,6 @@
 "use client";
 
+import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 
@@ -29,7 +30,10 @@ export function GenerateButton({
           Generating...
         </>
       ) : (
-        "Generate speech"
+        <>
+          <Sparkles className="size-3.5" />
+          Generate speech
+        </>
       )}
     </Button>
   );

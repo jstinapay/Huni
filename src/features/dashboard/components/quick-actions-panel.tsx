@@ -37,6 +37,7 @@ export function QuickActionsPanel() {
               description={action.description}
               gradient={action.gradient}
               href={action.href}
+              icon={action.icon}
             />
           </motion.div>
         ))}
