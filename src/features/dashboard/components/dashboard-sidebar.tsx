@@ -26,7 +26,6 @@ import {
   Settings,
   Mail,
   Search,
-  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
