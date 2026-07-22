@@ -51,40 +51,39 @@ export function TextInputPanel() {
           />
         </div>
 
-        <div className="flex items-center justify-between gap-3">
-          <Badge
-            variant="outline"
-            className={cn(
-              "gap-1.5 border-dashed transition-colors duration-200",
-              charCount > 0 && "border-solid border-chart-5/30 bg-chart-5/5"
-            )}
-          >
-            <Coins className="size-3 text-chart-5" />
-            <span className="text-xs">
-              {charCount === 0 ? (
-                "Start typing to estimate"
-              ) : (
-                <>
-                  <span className="tabular-nums">${cost.toFixed(4)}</span>&nbsp;estimated
-                </>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center justify-between gap-2 sm:justify-start">
+            <Badge
+              variant="outline"
+              className={cn(
+                "gap-1.5 border-dashed transition-colors duration-200",
+                charCount > 0 && "border-solid border-chart-5/30 bg-chart-5/5"
               )}
-            </span>
-          </Badge>
-
-          <div className="flex items-center gap-3">
-            {charCount > 0 && (
-              <p className="text-xs tabular-nums text-muted-foreground">
-                {charCount.toLocaleString()}
-                <span className="text-muted-foreground/60">&nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()}</span>
-              </p>
-            )}
-            <GenerateButton
-              size="sm"
-              disabled={isSubmitting || !isValid || !charCount}
-              isSubmitting={isSubmitting}
-              onSubmit={() => form.handleSubmit()}
-            />
+            >
+              <Coins className="size-3 text-chart-5" />
+              <span className="text-xs">
+                {charCount === 0 ? (
+                  "Start typing to estimate"
+                ) : (
+                  <>
+                    <span className="tabular-nums">${cost.toFixed(4)}</span>&nbsp;estimated
+                  </>
+                )}
+              </span>
+            </Badge>
+            <p className="text-xs tabular-nums text-muted-foreground">
+              {charCount.toLocaleString()}
+              <span className="text-muted-foreground/60">&nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()}</span>
+            </p>
           </div>
+
+          <GenerateButton
+            size="sm"
+            disabled={isSubmitting || !isValid || !charCount}
+            isSubmitting={isSubmitting}
+            onSubmit={() => form.handleSubmit()}
+            className="w-full sm:w-auto gap-1.5"
+          />
         </div>
       </div>
     </div>

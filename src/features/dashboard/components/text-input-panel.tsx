@@ -51,8 +51,8 @@ export function TextInputPanel() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between px-4 pb-3 pt-2">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col gap-3 px-4 pb-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center justify-between gap-2 sm:justify-start">
             <Badge
               variant="outline"
               className={cn(
@@ -83,7 +83,7 @@ export function TextInputPanel() {
             size="sm"
             disabled={!text.trim()}
             onClick={handleGenerate}
-            className="w-full lg:w-auto gap-1.5"
+            className="w-full gap-1.5 sm:w-auto"
           >
             <Sparkles className="size-3.5" />
             Generate speech
