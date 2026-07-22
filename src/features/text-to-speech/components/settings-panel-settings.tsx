@@ -15,7 +15,6 @@ export function SettingsPanelSettings() {
 
     return (
         <>
-            {/* Voice Style Dropdown Section */}
             <div className="border-b border-dashed p-4">
                 <p className="text-sm text-muted-foreground">
                     Voice selector coming soon
@@ -45,14 +44,13 @@ export function SettingsPanelSettings() {
                                         max={slider.max}
                                         step={slider.step}
                                         disabled={isSubmitting}
-                                        className="**:data-[slot=slider-thumb]:size-3 **:data-[slot=slider-thumb]:bg-foreground **:data-[slot=slider-track]:h-1"
+                                        className="**:data-[slot=slider-track]:h-1.5 **:data-[slot=slider-track]:rounded-full **:data-[slot=slider-range]:bg-primary/60 **:data-[slot=slider-thumb]:size-3.5 **:data-[slot=slider-thumb]:border-2 **:data-[slot=slider-thumb]:border-primary **:data-[slot=slider-thumb]:bg-background **:data-[slot=slider-thumb]:shadow-sm"
                                     />
                                 </Field>
                             )}
                         </form.Field>
                     ))}
                 </FieldGroup>
-
             </div>
         </>
     )

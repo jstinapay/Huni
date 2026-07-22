@@ -13,6 +13,7 @@ export function QuickActionCard({
   description,
   gradient,
   href,
+  icon: Icon,
 }: QuickActionCardProps) {
   return (
     <SpotlightCard
@@ -20,7 +21,7 @@ export function QuickActionCard({
       spotlightColor="rgba(27, 106, 165, 0.15)"
     >
       <div className="flex gap-4">
-        {/* Visual placeholder with gradient */}
+        {/* Visual with icon */}
         <div
           className={cn(
             "relative h-31 w-41 shrink-0 overflow-hidden rounded-xl bg-linear-to-br transition-transform duration-300 group-hover:scale-[1.02]",
@@ -28,7 +29,7 @@ export function QuickActionCard({
           )}
         >
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="size-12 rounded-full bg-white/30 transition-transform duration-500 group-hover:scale-110" />
+            <Icon className="size-7 text-white/80 transition-transform duration-500 group-hover:scale-110" />
           </div>
           <div className="absolute inset-2 rounded-lg ring-2 ring-inset ring-white/20" />
         </div>

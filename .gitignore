@@ -40,6 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# agent skills
+.agents/
+
 # clerk configuration (can include secrets)
 /.clerk/
 
