@@ -26,6 +26,8 @@ import {
   Settings,
   Mail,
   Search,
+  Sun,
+  Moon,
 } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -40,6 +42,7 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { useModifier } from "@/hooks/use-modifier";
 
 interface MenuItem {
@@ -97,7 +100,7 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
                   aria-disabled={item.disabled}
                   disabled={item.disabled}
                   size="lg"
-                  className="group/menu-button relative h-10 rounded-xl border border-transparent px-3 py-2 text-[13px] font-medium tracking-tight text-sidebar-foreground/75 transition-all duration-150 hover:translate-x-0.5 hover:border-sidebar-border/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:border-sidebar-border/80 data-[active=true]:bg-sidebar-accent/90 data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-semibold data-[active=true]:shadow-[0px_1px_2px_0px_rgba(44,54,53,0.04),inset_0px_0px_0px_1px_rgba(255,255,255,0.7)] before:absolute before:left-1 before:top-1/2 before:h-0 before:w-0.5 before:-translate-y-1/2 before:rounded-full before:bg-sidebar-primary before:transition-all before:duration-200 data-[active=true]:before:h-4 data-[active=true]:before:opacity-100 group-data-[collapsible=icon]:h-10 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:mx-auto"
+                  className="group/menu-button relative h-10 rounded-xl border border-transparent px-3 py-2 text-[13px] font-medium tracking-tight text-sidebar-foreground/75 transition-all duration-150 hover:translate-x-0.5 hover:border-sidebar-border/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:border-sidebar-border/80 data-[active=true]:bg-sidebar-accent/90 data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-semibold data-[active=true]:shadow-[0px_1px_2px_0px_rgba(44,54,53,0.04),inset_0px_0px_0px_1px_rgba(255,255,255,0.7)] data-[active=true]:dark:shadow-[0px_1px_2px_0px_rgba(0,0,0,0.2),inset_0px_0px_0px_1px_rgba(255,255,255,0.08)] before:absolute before:left-1 before:top-1/2 before:h-0 before:w-0.5 before:-translate-y-1/2 before:rounded-full before:bg-sidebar-primary before:transition-all before:duration-200 data-[active=true]:before:h-4 data-[active=true]:before:opacity-100 group-data-[collapsible=icon]:h-10 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:mx-auto"
                 >
                   <item.icon className="size-4 shrink-0 text-sidebar-foreground/50 transition-colors duration-150 group-data-[active=true]/menu-button:text-sidebar-primary" />
                   <span className="group-data-[collapsible=icon]:hidden">{item.title}</span>
@@ -155,7 +158,11 @@ export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const clerk = useClerk();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
+
+  useEffect(() => { setMounted(true) }, []);
 
   const otherMenuItems: MenuItem[] = [
     {
@@ -243,15 +250,74 @@ export function DashboardSidebar() {
         </SidebarHeader>
         <SidebarContent className="py-3">
           <NavSection items={MAIN_MENU_ITEMS} pathname={pathname} />
-          <NavSection
-            label="Support"
-            items={otherMenuItems}
-            pathname={pathname}
-          />
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-[11px] font-semibold uppercase tracking-widest text-sidebar-foreground/50 group-data-[collapsible=icon]:sr-only">
+              Others
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="gap-0.5">
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    tooltip="Toggle theme"
+                    size="lg"
+                    onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                    className="group/menu-button relative h-10 rounded-xl border border-transparent px-3 py-2 text-[13px] font-medium tracking-tight text-sidebar-foreground/75 transition-all duration-150 hover:translate-x-0.5 hover:border-sidebar-border/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:h-10 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:mx-auto"
+                  >
+                    <Sun className="size-4 shrink-0 scale-100 transition-all dark:scale-0" />
+                    <Moon className="absolute size-4 shrink-0 scale-0 transition-all dark:scale-100" />
+                    <span className="group-data-[collapsible=icon]:hidden">Appearance</span>
+                  </SidebarMenuButton>
+                  <SidebarMenuBadge className="right-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/40">
+                    {mounted ? (resolvedTheme === "dark" ? "Dark" : "Light") : "Light"}
+                  </SidebarMenuBadge>
+                </SidebarMenuItem>
+                {otherMenuItems.map((item) => {
+                  const isActive = item.url
+                    ? item.url === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(item.url)
+                    : false;
+                  const isExternal = item.url?.startsWith("mailto:");
+
+                  return (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        render={
+                          item.url ? (
+                            isExternal ? (
+                              <a href={item.url} />
+                            ) : (
+                              <Link href={item.url} />
+                            )
+                          ) : undefined
+                        }
+                        isActive={isActive}
+                        onClick={item.onClick}
+                        tooltip={item.tooltip ?? item.title}
+                        aria-current={isActive ? "page" : undefined}
+                        aria-disabled={item.disabled}
+                        disabled={item.disabled}
+                        size="lg"
+                        className="group/menu-button relative h-10 rounded-xl border border-transparent px-3 py-2 text-[13px] font-medium tracking-tight text-sidebar-foreground/75 transition-all duration-150 hover:translate-x-0.5 hover:border-sidebar-border/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:border-sidebar-border/80 data-[active=true]:bg-sidebar-accent/90 data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-semibold data-[active=true]:shadow-[0px_1px_2px_0px_rgba(44,54,53,0.04),inset_0px_0px_0px_1px_rgba(255,255,255,0.7)] data-[active=true]:dark:shadow-[0px_1px_2px_0px_rgba(0,0,0,0.2),inset_0px_0px_0px_1px_rgba(255,255,255,0.08)] before:absolute before:left-1 before:top-1/2 before:h-0 before:w-0.5 before:-translate-y-1/2 before:rounded-full before:bg-sidebar-primary before:transition-all before:duration-200 data-[active=true]:before:h-4 data-[active=true]:before:opacity-100 group-data-[collapsible=icon]:h-10 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:mx-auto"
+                      >
+                        <item.icon className="size-4 shrink-0 text-sidebar-foreground/50 transition-colors duration-150 group-data-[active=true]/menu-button:text-sidebar-primary" />
+                        <span className="group-data-[collapsible=icon]:hidden">{item.title}</span>
+                        {item.badge && (
+                          <SidebarMenuBadge className="right-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/40">
+                            {item.badge}
+                          </SidebarMenuBadge>
+                        )}
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
         <div className="mx-3 border-t border-dashed border-sidebar-border/50" />
         <SidebarFooter className="gap-3 py-3">
-          <SidebarMenu className="gap-1.5">
+          <SidebarMenu className="gap-0.5">
             <SidebarMenuItem>
               <OrganizationSwitcher
                 hidePersonal

@@ -31,10 +31,10 @@ export function TextInputPanel() {
       initial={{ opacity: 0, y: 20, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="rounded-[22px] bg-linear-185 from-[#ff8ee3] from-15% via-[#57d7e0] via-39% to-[#dbf1f2] to-85% p-0.5 shadow-[0_0_0_4px_white]"
+      className="rounded-[22px] bg-linear-185 from-[#ff8ee3] from-15% via-[#57d7e0] via-39% to-[#dbf1f2] to-85% p-0.5 shadow-[0_0_0_4px_hsl(var(--card))]"
     >
-      <div className="rounded-[20px] bg-[#F9F9F9] p-1">
-        <div className="space-y-3 rounded-2xl bg-white p-4 drop-shadow-xs">
+      <div className="rounded-[20px] bg-muted/50 p-1">
+        <div className="space-y-3 rounded-2xl bg-card p-4 drop-shadow-xs">
           <Textarea
             placeholder="Start typing or paste your text here..."
             className="h-48 resize-none border-0 bg-transparent px-3 py-2 shadow-none leading-relaxed text-[15px] focus-visible:ring-0 focus-visible:border-transparent"

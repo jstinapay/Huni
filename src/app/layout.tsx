@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import { TRPCReactProvider } from "@/trpc/client";
 
@@ -29,12 +30,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <TRPCReactProvider>
-        <html lang="en" className={cn("font-sans", inter.variable)}>
+        <html lang="en" className={cn("font-sans", inter.variable)} suppressHydrationWarning>
           <body
             className={`${inter.variable} ${geistMono.variable} antialiased`}
           >
-            {children}
-            <Toaster />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+              {children}
+              <Toaster />
+            </ThemeProvider>
           </body>
         </html>
       </TRPCReactProvider>
