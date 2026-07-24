@@ -28,6 +28,7 @@ import {
   Search,
   Sun,
   Moon,
+  Monitor,
 } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -260,15 +261,25 @@ export function DashboardSidebar() {
                   <SidebarMenuButton
                     tooltip="Toggle theme"
                     size="lg"
-                    onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                    onClick={() => {
+                      const cycle = ["light", "dark", "system"] as const;
+                      const idx = cycle.indexOf((theme ?? "system") as typeof cycle[number]);
+                      setTheme(cycle[(idx + 1) % cycle.length]);
+                    }}
                     className="group/menu-button relative h-10 rounded-xl border border-transparent px-3 py-2 text-[13px] font-medium tracking-tight text-sidebar-foreground/75 transition-all duration-150 hover:translate-x-0.5 hover:border-sidebar-border/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:h-10 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:mx-auto"
                   >
-                    <Sun className="size-4 shrink-0 scale-100 transition-all dark:scale-0" />
-                    <Moon className="absolute size-4 shrink-0 scale-0 transition-all dark:scale-100" />
+                    {mounted && theme === "system" ? (
+                      <Monitor className="size-4 shrink-0" />
+                    ) : (
+                      <>
+                        <Sun className="size-4 shrink-0 scale-100 transition-all dark:scale-0" />
+                        <Moon className="absolute size-4 shrink-0 scale-0 transition-all dark:scale-100" />
+                      </>
+                    )}
                     <span className="group-data-[collapsible=icon]:hidden">Appearance</span>
                   </SidebarMenuButton>
                   <SidebarMenuBadge className="right-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/40">
-                    {mounted ? (resolvedTheme === "dark" ? "Dark" : "Light") : "Light"}
+                    {mounted ? (theme === "system" ? "System" : theme === "dark" ? "Dark" : "Light") : "System"}
                   </SidebarMenuBadge>
                 </SidebarMenuItem>
                 {otherMenuItems.map((item) => {
@@ -341,7 +352,7 @@ export function DashboardSidebar() {
                 }}
               />
             </SidebarMenuItem>
-            <SidebarMenuItem>
+            <SidebarMenuItem className="mt-1">
               <UserButton
                 showName
                 fallback={

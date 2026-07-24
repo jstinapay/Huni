@@ -6,13 +6,13 @@ import { WavyBackground } from "@/components/ui/wavy-background"
 
 export function HeroPattern() {
     const { resolvedTheme } = useTheme()
-    const [bgFill, setBgFill] = useState("hsl(0 0% 100%)")
+    const [opts, setOpts] = useState({ bgFill: "hsl(0 0% 100%)", waveOpacity: 0.1 })
 
     useEffect(() => {
         if (resolvedTheme === "dark") {
-            setBgFill("oklch(0.148 0.004 228.8)")
+            setOpts({ bgFill: "oklch(0.148 0.004 228.8)", waveOpacity: 0 })
         } else {
-            setBgFill("hsl(0 0% 100%)")
+            setOpts({ bgFill: "hsl(0 0% 100%)", waveOpacity: 0.1 })
         }
     }, [resolvedTheme])
 
@@ -20,10 +20,10 @@ export function HeroPattern() {
         <div className="pointer-events-none absolute inset-0 hidden overflow-hidden lg:block">
             <WavyBackground 
                 colors={["#2DD4BF", "#22D3EE", "#38BDF8", "#818CF8"]}
-                backgroundFill={bgFill}
+                backgroundFill={opts.bgFill}
                 blur={3}
                 speed="slow"
-                waveOpacity={0.1}
+                waveOpacity={opts.waveOpacity}
                 waveWidth={100}
                 waveYOffset={670}
                 containerClassName="h-full"
